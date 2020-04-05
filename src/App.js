@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import { Switch, Route } from "react-router-dom";
 import routes from "./routes/routes";
 import Home from "./pages/Home";
+import PostPage from "./pages/PostPage";
 
 export default function App() {
   return (
@@ -18,6 +19,9 @@ export default function App() {
         </Route>
         <Route path={routes.newPost}>
           <h3>New Post!</h3>
+        </Route>
+        <Route path={routes.post}>
+          <PostPage />
         </Route>
       </Switch>
     </div>
