@@ -6,9 +6,9 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   NavbarText
 } from "reactstrap";
+import { NavLink } from "react-router-dom";
 import routes from "../routes/routes";
 
 const Header = ({}) => {
@@ -24,16 +24,34 @@ const Header = ({}) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href={routes.home}>Home</NavLink>
+              <NavLink
+                className={"nav-link"}
+                activeClassName={"active"}
+                to={routes.home}
+              >
+                Home
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href={routes.authors}>Authors</NavLink>
+              <NavLink
+                className={"nav-link"}
+                activeClassName={"active"}
+                to={routes.authors}
+              >
+                Authors
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href={routes.newPost}>New Post</NavLink>
+              <NavLink
+                className={"nav-link"}
+                activeClassName={"active"}
+                to={routes.newPost}
+              >
+                New Post
+              </NavLink>
             </NavItem>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
+          <NavbarText>About</NavbarText>
         </Collapse>
       </Navbar>
     </div>
