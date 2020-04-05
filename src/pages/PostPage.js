@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Post from "../Components/Post";
+import { useParams } from "react-router-dom";
+import postData from "../mockData/postData";
 
 const PostPage = () => {
-  return <Post />;
+  const { id } = useParams();
+  const [post] = useState(postData.find(post => post.id === id) || {});
+
+  return (
+    <Post title={post.title} author={post.author} content={post.content} />
+  );
 };
 
 export default PostPage;
