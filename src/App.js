@@ -13,6 +13,12 @@ export default function App() {
         <Route path={routes.home}>
           <Home />
         </Route>
+        <Route path={routes.authors}>
+          <h3>Authors</h3>
+        </Route>
+        <Route path={routes.newPost}>
+          <h3>New Post!</h3>
+        </Route>
       </Switch>
     </div>
   );

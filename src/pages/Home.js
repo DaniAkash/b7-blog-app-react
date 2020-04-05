@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Post from "../Components/Post";
 import postData from "../mockData/postData";
+import { Button } from "reactstrap";
 
 const Home = () => {
   const [posts, setPosts] = useState(postData);
@@ -9,12 +10,19 @@ const Home = () => {
     <Fragment>
       {posts.map((post, postIndex) => {
         return (
-          <Post
-            title={post.title}
-            author={post.author}
-            content={post.content}
-            key={postIndex}
-          />
+          <Fragment key={postIndex}>
+            <Post
+              title={post.title}
+              author={post.author}
+              content={post.content}
+              isOnlySummary
+            />
+            <div className={"container"}>
+              <Button onClick={() => null} color={"primary"}>
+                Read More
+              </Button>
+            </div>
+          </Fragment>
         );
       })}
     </Fragment>
