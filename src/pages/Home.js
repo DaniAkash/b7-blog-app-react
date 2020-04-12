@@ -1,13 +1,21 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Post from "../Components/Post";
-import postData from "../mockData/postData";
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import routes from "../routes/routes";
 
 const Home = () => {
-  const [posts] = useState(postData);
+  const [posts, setPosts] = useState([]);
   const history = useHistory();
+
+  useEffect(() => {
+    fetch("https://ts5uf.sse.codesandbox.io/posts")
+      .then(response => response.json())
+      .then(data => {
+        setPosts(data.posts);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <Fragment>
@@ -20,7 +28,7 @@ const Home = () => {
           <Fragment key={postIndex}>
             <Post
               title={post.title}
-              author={post.author}
+              author={post.author.name}
               content={post.content}
               isOnlySummary
             />
