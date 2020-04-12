@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import routes from "./routes/routes";
 import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
+import NewPost from "./pages/NewPost";
 
 export default function App() {
   return (
@@ -18,7 +19,7 @@ export default function App() {
           <h3>Authors</h3>
         </Route>
         <Route path={routes.newPost}>
-          <h3>New Post!</h3>
+          <NewPost />
         </Route>
         <Route path={routes.post}>
           <PostPage />
