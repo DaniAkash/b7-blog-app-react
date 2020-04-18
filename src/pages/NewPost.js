@@ -23,21 +23,31 @@ const NewPost = () => {
 
   const submitForm = async event => {
     event.preventDefault();
-    const postData = {
-      title: postTitle,
-      content: postText,
-      author: authorId
-    };
-    const response = await fetch("https://ts5uf.sse.codesandbox.io/posts", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(postData)
-    });
-    const data = await response.json();
-    console.log(data);
+    try {
+      const postData = {
+        title: postTitle,
+        content: postText,
+        author: authorId
+      };
+      const response = await fetch("https://ts5uf.sse.codesandbox.io/posts", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      });
+      const data = await response.json();
+      if (data.status === "SUCCESS") {
+        alert("New post has been created!");
+      } else {
+        console.error(data);
+        alert("Unable to submit form!");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Unable to submit form!");
+    }
   };
 
   return (
@@ -58,7 +68,12 @@ const NewPost = () => {
         <FormGroup>
           <Label for="authorName">Author Name</Label>
 
-          <select value={authorId} onChange={onAuthorNameChange}>
+          <Input
+            id="authorName"
+            type="select"
+            value={authorId}
+            onChange={onAuthorNameChange}
+          >
             {" "}
             {authorsList.map(author => {
               return (
@@ -67,7 +82,7 @@ const NewPost = () => {
                 </option>
               );
             })}
-          </select>
+          </Input>
         </FormGroup>
 
         <FormGroup>
