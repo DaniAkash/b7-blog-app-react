@@ -22,7 +22,7 @@ const Home = () => {
     <Fragment>
       {posts.map((post, postIndex) => {
         const onReadMore = () => {
-          history.push(routes.post.replace(":id", post.id));
+          history.push(routes.post.replace(":id", post._id));
         };
 
         return (

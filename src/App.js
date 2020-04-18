@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.css";
 import Header from "./Components/Header";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import routes from "./routes/routes";
 import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
@@ -9,6 +9,15 @@ import NewPost from "./pages/NewPost";
 import ErrorBoundary from "./Components/ErrorBoundary";
 
 export default function App() {
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      history.push(routes.home);
+    }
+  }, []);
+
   return (
     <div className="App">
       <Header />
