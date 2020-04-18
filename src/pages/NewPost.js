@@ -10,9 +10,23 @@ const NewPost = () => {
   const onPostTextChange = event => setPostText(event.target.value);
   const onPostTitleChange = event => setPostTitle(event.target.value);
 
-  const submitForm = event => {
+  const submitForm = async event => {
     event.preventDefault();
-    console.log(authorName, postText, postTitle);
+    const postData = {
+      title: postTitle,
+      content: postText,
+      author: authorName
+    };
+    const response = await fetch("https://ts5uf.sse.codesandbox.io/posts", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(postData)
+    });
+    const data = await response.json();
+    console.log(data);
   };
 
   return (
