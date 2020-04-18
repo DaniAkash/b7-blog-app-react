@@ -3,6 +3,7 @@ import Post from "../Components/Post";
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import routes from "../routes/routes";
+import ErrorBoundary from "../Components/ErrorBoundary";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -26,12 +27,14 @@ const Home = () => {
 
         return (
           <Fragment key={postIndex}>
-            <Post
-              title={post.title}
-              author={post.author.name}
-              content={post.content}
-              isOnlySummary
-            />
+            <ErrorBoundary>
+              <Post
+                title={post.title}
+                author={post.author}
+                content={post.content}
+                isOnlySummary
+              />
+            </ErrorBoundary>
             <div className={"container"}>
               <Button onClick={onReadMore} color={"primary"}>
                 Read More

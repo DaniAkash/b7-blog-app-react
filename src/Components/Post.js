@@ -5,7 +5,7 @@ const Post = ({ title, author, content, isOnlySummary = false }) => {
   return (
     <div className={"container"}>
       <h2>{title}</h2>
-      <p>{author}</p>
+      <p>{author.name}</p>
       <p>{isOnlySummary ? content.substr(0, 80) + "..." : content}</p>
     </div>
   );

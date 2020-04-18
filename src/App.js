@@ -6,6 +6,7 @@ import routes from "./routes/routes";
 import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
 import NewPost from "./pages/NewPost";
+import ErrorBoundary from "./Components/ErrorBoundary";
 
 export default function App() {
   return (
@@ -13,7 +14,9 @@ export default function App() {
       <Header />
       <Switch>
         <Route path={routes.home}>
-          <Home />
+          <ErrorBoundary>
+            <Home />
+          </ErrorBoundary>
         </Route>
         <Route path={routes.authors}>
           <h3>Authors</h3>
