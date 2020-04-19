@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import adminRequests from "../services/adminRequests";
+import useAdminProvider from "../store/AdminProvider/useAdminProvider";
+import { useHistory } from "react-router-dom";
+import routes from "../routes/routes";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const { setAdminLoggedIn } = useAdminProvider();
+  const history = useHistory();
 
   const updateEmail = event => setEmail(event.target.value);
   const updatePassword = event => setPassword(event.target.value);
@@ -19,7 +25,13 @@ const LoginPage = () => {
     })
       .then(result => {
         if (result.status === "SUCCESS") {
-          alert("logged in!");
+          setAdminLoggedIn();
+          // Since we don't have cookes, store jwt in localstorage
+          window.localStorage.setItem("jwtToken", result.jwtToken);
+
+          // User Experience
+          alert("Successfully loggedIn!");
+          history.push(routes.home);
         } else {
           alert("invalid user");
         }

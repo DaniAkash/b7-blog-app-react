@@ -9,13 +9,16 @@ const { Provider } = AdminContext;
 const AdminProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(isAdminLoggedIn);
 
-  const toggleIsLoggedIn = () => setIsLoggedIn(!isLoggedIn);
+  const loginUser = () => setIsLoggedIn(true);
+
+  const logoutUser = () => setIsLoggedIn(false);
 
   return (
     <Provider
       value={{
         isAdminLoggedIn: isLoggedIn,
-        toggleAdminLoginStatus: toggleIsLoggedIn
+        setAdminLoggedIn: loginUser,
+        setAdminLoggedOut: logoutUser
       }}
     >
       {children}

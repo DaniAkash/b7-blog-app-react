@@ -3,7 +3,7 @@ const adminRequests = (url, method = "GET", data = {}) => {
     try {
       const headers = new Headers({
         "Content-Type": "application/json",
-        Authorization: "jwt token goes here"
+        Authorization: localStorage.getItem("jwtToken")
       });
 
       const config = {
