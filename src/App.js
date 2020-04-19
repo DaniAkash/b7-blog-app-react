@@ -8,6 +8,7 @@ import PostPage from "./pages/PostPage";
 import NewPost from "./pages/NewPost";
 import ErrorBoundary from "./Components/ErrorBoundary";
 import useAdminProvider from "./store/AdminProvider/useAdminProvider";
+import LoginPage from "./pages/LoginPage";
 
 export default function App() {
   const history = useHistory();
@@ -39,6 +40,9 @@ export default function App() {
         </Route>
         <Route path={routes.post}>
           <PostPage />
+        </Route>
+        <Route path={routes.adminLogin}>
+          <LoginPage />
         </Route>
       </Switch>
     </div>
