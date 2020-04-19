@@ -5,15 +5,20 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  NavbarText
+  Button
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import routes from "../routes/routes";
+import useAdminProvider from "../store/AdminProvider/useAdminProvider";
 
 const Header = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { isAdminLoggedIn } = useAdminProvider();
+
   const toggle = () => setIsOpen(!isOpen);
+
+  const logout = () => {};
 
   return (
     <div>
@@ -52,7 +57,17 @@ const Header = ({}) => {
               </NavLink>
             </NavItem>
           </Nav>
-          <NavbarText>About</NavbarText>
+          {isAdminLoggedIn ? (
+            <Button onClick={logout}>Logout</Button>
+          ) : (
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to={routes.adminLogin}
+            >
+              Login
+            </NavLink>
+          )}
         </Collapse>
       </Navbar>
     </div>

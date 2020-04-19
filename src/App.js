@@ -7,10 +7,14 @@ import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
 import NewPost from "./pages/NewPost";
 import ErrorBoundary from "./Components/ErrorBoundary";
+import useAdminProvider from "./store/AdminProvider/useAdminProvider";
 
 export default function App() {
   const history = useHistory();
   const location = useLocation();
+  const providerValues = useAdminProvider();
+
+  console.log(providerValues);
 
   useEffect(() => {
     if (location.pathname === "/") {
