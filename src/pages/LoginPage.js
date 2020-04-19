@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import adminRequests from "../services/adminRequests";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,21 @@ const LoginPage = () => {
   const formSubmit = event => {
     event.preventDefault();
     setIsLoading(true);
+    adminRequests("https://ts5uf.sse.codesandbox.io/admin/login", "POST", {
+      email,
+      password
+    })
+      .then(result => {
+        if (result.status === "SUCCESS") {
+          alert("logged in!");
+        } else {
+          alert("invalid user");
+        }
+      })
+      .catch(e => {
+        console.error(e);
+        alert("Something went wrong...");
+      });
   };
 
   return (
