@@ -9,18 +9,23 @@ import NewPost from "./pages/NewPost";
 import ErrorBoundary from "./Components/ErrorBoundary";
 import useAdminProvider from "./store/AdminProvider/useAdminProvider";
 import LoginPage from "./pages/LoginPage";
+import adminRequests from "./services/adminRequests";
 
 export default function App() {
   const history = useHistory();
   const location = useLocation();
-  const providerValues = useAdminProvider();
-
-  console.log(providerValues);
+  const { setAdminLoggedIn } = useAdminProvider();
 
   useEffect(() => {
     if (location.pathname === "/") {
       history.push(routes.home);
     }
+
+    adminRequests("https://ts5uf.sse.codesandbox.io/admin/isLoggedIn")
+      .then(() => {
+        setAdminLoggedIn(true);
+      })
+      .catch(console.error);
   }, []);
 
   return (
