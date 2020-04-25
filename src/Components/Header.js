@@ -18,7 +18,10 @@ const Header = ({}) => {
 
   const toggle = () => setIsOpen(!isOpen);
 
-  const logout = () => {};
+  const logout = () => {
+    window.localStorage.removeItem("jwtToken");
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -47,15 +50,17 @@ const Header = ({}) => {
                 Authors
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink
-                className={"nav-link"}
-                activeClassName={"active"}
-                to={routes.newPost}
-              >
-                New Post
-              </NavLink>
-            </NavItem>
+            {isAdminLoggedIn ? (
+              <NavItem>
+                <NavLink
+                  className={"nav-link"}
+                  activeClassName={"active"}
+                  to={routes.newPost}
+                >
+                  New Post
+                </NavLink>
+              </NavItem>
+            ) : null}
           </Nav>
           {isAdminLoggedIn ? (
             <Button onClick={logout}>Logout</Button>

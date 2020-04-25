@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { FormGroup, Label, Input, Form, Button } from "reactstrap";
+import useAdminProvider from "../store/AdminProvider/useAdminProvider";
+import { useHistory } from "react-router-dom";
+import routes from "../routes/routes";
 
 const NewPost = () => {
   const [authorId, setAuthorId] = useState("");
   const [postText, setPostText] = useState("");
   const [postTitle, setPostTitle] = useState("");
+
+  const history = useHistory();
+
+  const { isAdminLoggedIn } = useAdminProvider();
 
   const [authorsList, setAuthorsList] = useState([]);
 
@@ -19,6 +26,10 @@ const NewPost = () => {
         setAuthorsList(data.authors);
       })
       .catch(console.error);
+
+    if (!isAdminLoggedIn) {
+      history.push(routes.home);
+    }
   }, []);
 
   const submitForm = async event => {
